@@ -8,5 +8,6 @@ export default registerAs('database', () => ({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
     autoLoadEntities: true, // Automatically discovers entities matching the feature structure
-    synchronize: process.env.NODE_ENV !== 'production', // Disable in production!
+    synchronize: false, // Schema changes go through migrations only, see src/migrations
+    migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
 }));

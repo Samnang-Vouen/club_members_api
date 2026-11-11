@@ -23,6 +23,38 @@
 
 ## Description
 
+**Club Members API** — a NestJS + PostgreSQL REST API for managing the members of a school club: who they are, their role, and whether they're currently active.
+
+### Data fields (`Member` entity)
+
+- `id` — auto-generated primary key
+- `name` — the member's name
+- `role` — their role in the club (e.g. "Treasurer", "President")
+- `active` — true/false status: whether they're a current member
+- `createdAt` / `updatedAt` — set and maintained automatically
+
+### Routes
+
+| Action | Method | URL |
+|---|---|---|
+| List all members | GET | `/members` |
+| Get one member | GET | `/members/:id` |
+| Create a member | POST | `/members` |
+| Update a member | PATCH | `/members/:id` |
+| Delete a member | DELETE | `/members/:id` |
+
+`POST`, `PATCH`, and `DELETE` require a JWT (`Authorization: Bearer <token>`), obtained via `POST /auth/login`. `GET` routes are public.
+
+**Login** (`POST /auth/login`):
+
+```json
+{ "email": "admin@gmail.com", "password": "admin123" }
+```
+
+→ `201` with `{ "access_token": "<jwt>" }`. There's a single admin credential (set via `ADMIN_EMAIL` / `ADMIN_PASSWORD_HASH` in `.env`) — it's not tied to any member record.
+
+---
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
